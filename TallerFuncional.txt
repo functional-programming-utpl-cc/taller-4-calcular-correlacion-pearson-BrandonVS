@@ -1,0 +1,17 @@
+val table = List((72, 115), (76, 121), (78, 125), (81, 130), (89, 141), (95, 150), (108, 165), (115, 170), (120, 177), (130, 178))
+
+val calcN = (table: List[(Int, Int)]) => table.map(x => x._1).length
+
+val calcXp = (table: List[(Int, Int)]) => table.map(x => x._1).sum / calcN(table).toDouble
+
+val calcYp = (table: List[(Int, Int)]) => table.map(x => x._2).sum / calcN(table).toDouble
+
+val DTx = (table: List[(Int, Int)]) => math.sqrt((table.map(x => math.pow(x._1, 2)).sum / calcN(table)) - math.po
+w(calcXp(table), 2))
+
+val DTy = (table: List[(Int, Int)]) => math.sqrt((table.map(x => math.pow(x._2, 2)).sum / calcN(table)) - math.po
+w(calcYp(table), 2))
+
+val CV = (table: List[(Int, Int)]) => (table.map(x => x._1 * x._2).sum / calcN(table)) - (calcXp(table) * calcYp(table))
+
+val r = (table: List[(Int, Int)]) => CV(table) / (DTx(table) * DTy(table))
